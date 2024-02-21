@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <cmath>
 #include <fstream>
+#include <string>
 
 
 int** createMatrix(int n, int m) {
@@ -48,7 +49,7 @@ int** createTransposedMatrix(int** sourceMatrix, int n, int m) {
 
 int** multiply(int** leftMatrix, int** rightMatrix, int n, int p, int m) {
     int** result = createMatrix(n, m);
-    for (int i = 0; i < n; i)
+    for (int i = 0; i < n; i++)
         for (int j = 0; j < m; j++) {
             result[i][j] = 0;
             for (int k = 0; k < p; k++) {
@@ -64,6 +65,7 @@ double calculateLength(int** g, int** x, int n) {
     int** xt = createTransposedMatrix(x, 1, n); // [n][1]
     int** x_g_xt = multiply(x_g, xt, 1, n, 1); // [1][1]
 
+    std::cout << x_g_xt[0][0];
     double length = std::sqrt(x_g_xt[0][0]);
 
     deleteMatrix(x_g, 1);
@@ -74,17 +76,26 @@ double calculateLength(int** g, int** x, int n) {
 }
 
 
-void readInputFile(const char* filePath, int& n, int**& g, int**& x) {
-    // TODO: enter n, g and x
+void readInputFile(std::string filePath, int& n, int**& g, int**& x) {
+    std::ifstream inputStream(filePath);
+
+    inputStream >> n;
     g = createMatrix(n, n);
     x = createMatrix(1, n);
+
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            inputStream >> g[i][j];
+
+    for (int i = 0; i < n; i++)
+        inputStream >> x[0][i];
 }
 
 
 int main(int argc, char* argv[])
 {
     puts("Enter the path to the file: ");
-    char* filePath;
+    std::string filePath;
     std::cin >> filePath;
 
     int n;
@@ -97,8 +108,8 @@ int main(int argc, char* argv[])
         exit(-1);
     }
 
-    int length = calculateLength(g, x, n);
-    printf("Vector X length: %d", length);
+    double length = calculateLength(g, x, n);
+    printf("Vector X length: %f", length);
 
     deleteMatrix(g, n);
     deleteMatrix(x, 1);
