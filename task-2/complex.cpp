@@ -63,7 +63,7 @@ Complex operator*(const Complex& left, const Complex& right) {
 	double rightReal = ((Complex)right).Real();
 	double rightImag = ((Complex)right).Imag();
 	double real = (leftReal * rightReal) - (leftImag * rightImag);
-	double imag = (leftReal * rightImag) - (leftImag * rightReal);
+	double imag = (leftReal * rightImag) + (leftImag * rightReal);
 	return Complex{ real, imag };
 }
 
