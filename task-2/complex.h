@@ -2,7 +2,7 @@
 #include <cmath>
 #include <string>
 
-class Complex {
+struct Complex {
 private:
 	double real;
 	double imag;
