@@ -79,3 +79,12 @@ Complex operator/(const Complex& left, const Complex& right) {
 	double imag = numeratorImag / denominator;
 	return Complex{ real, imag };
 }
+
+Complex Complex::operator-() {
+	return (*this) * Complex{ -1, 0 };
+}
+
+std::string Complex::toString() {
+	const char* sign = this->imag < 0 ? "-" : "+";
+	return std::to_string(this->real) + sign + std::to_string(this->imag) + "i";
+}
