@@ -1,8 +1,10 @@
 #pragma once
-#define _USE_MATH_DEFINES
 #include "cmath"
 #include "numeric"
 #include "complex.h"
+
+#define PI 3.1415926
+#define PI_2 1.570796
 
 double Complex::Real() { return this->real; }
 
@@ -32,13 +34,13 @@ double Complex::Arg() {
 
 	if (firstQuarter) return module;
 	else if (secondQuarter) return -module;
-	else if (thirdQuarter) return std::M_PI - module;
-	else if (fourthQuarter) return module - std::M_PI;
+	else if (thirdQuarter) return PI - module;
+	else if (fourthQuarter) return module - PI;
 
-	else if (positiveImag) return std::M_PI_2;
-	else if (negativeImag) return -std::M_PI_2;
+	else if (positiveImag) return PI_2;
+	else if (negativeImag) return -PI_2;
 	else if (positiveReal) return 0;
-	else if (negativeReal) return std::M_PI;
+	else if (negativeReal) return PI;
 
 	else return std::numeric_limits<double>::signaling_NaN();
 }
