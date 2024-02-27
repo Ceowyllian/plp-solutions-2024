@@ -69,9 +69,10 @@ int main()
 		case 'Q':
 			exit(0);
 		default:
-			throw new std::exception("Invalid operation");
+			puts("Unknown operation");
+			continue;
 		}
-		std::cout << "result: " << result << "\n";
+		printf("Result: %s", result.c_str());
 		system("pause");
 	}
 }
